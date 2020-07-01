@@ -23,6 +23,25 @@ function buildCharts(sampleid) {
         console.log(otuSamples);
         console.log(sample_values);
         console.log(otu_ids);
+
+        function demographicInfo(incomingData){
+            var panel = d3.selectAll("#sample-metadata");
+            console.log("listing demographic info")
+
+
+           
+            var metadata = incomingData.metadata;
+            var filteredmetadata = metadata.filter(metadata => metadata.id==sampleid)[0];
+            console.log(filteredmetadata, "filtered metadata");
+            panel.append(filteredmetadata);
+         
+            
+    
+
+        }
+
+        demographicInfo(incomingData);
+
         //Create a trace
         var trace1 = {
             x: sample_values,
@@ -49,7 +68,7 @@ function buildCharts(sampleid) {
             y: otuSamples.sample_values,
             mode: 'markers',
             marker: {
-                color: ['rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)'],
+                color: otuSamples.otu_ids,
                 opacity: [1, 0.8, 0.6, 0.4],
                 size: [40, 60, 80, 100]
               }
